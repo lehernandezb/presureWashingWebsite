@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LJ WashWorks – Pressure Washing Services</title>
+
+  <!-- Google Fonts: Bebas Neue (headings) + Nunito (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES – change these to retheme the whole site
+    ============================================================ */
+    :root {
+      --blue-dark:    #0a3d5c;   /* deep navy used for footer/nav bg */
+      --blue-primary: #1472A4;   /* brand blue – buttons, accents     */
+      --blue-mid:     #1e8ec8;   /* slightly lighter highlight        */
+      --blue-light:   #d0eaf7;   /* very light blue for subtle areas  */
+      --white:        #ffffff;
+      --off-white:    #f4faff;
+      --text-dark:    #0d2235;
+      --text-muted:   #4a6a82;
+
+      --font-heading: 'Bebas Neue', sans-serif;
+      --font-body:    'Nunito', sans-serif;
+
+      --radius:    10px;
+      --shadow:    0 4px 24px rgba(20, 114, 164, 0.18);
+      --transition: 0.25s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--off-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ============================================================
+       NAVIGATION BAR
+    ============================================================ */
+    nav {
+      background: var(--blue-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    /* Company name / logo text in the nav */
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
+      color: var(--white);
+      letter-spacing: 2px;
+    }
+
+    .nav-logo span {
+      color: var(--blue-mid); /* "WashWorks" in a lighter blue */
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--blue-light);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero {
+      /* Gradient overlay + a water-texture-like radial glow */
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(30, 142, 200, 0.35) 0%, transparent 60%),
+        linear-gradient(135deg, var(--blue-dark) 0%, #0e5a8a 55%, #1472A4 100%);
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 6vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative water-drop circles in the background */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .hero::before { width: 600px; height: 600px; right: -120px; top: -100px; }
+    .hero::after  { width: 350px; height: 350px; right: 200px;  bottom: -80px; background: rgba(30,142,200,0.12); }
+
+    .hero-content {
+      max-width: 620px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    /* Small "badge" above the main heading */
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--blue-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span { color: var(--blue-mid); } /* accent word */
+
+    .hero p {
+      color: var(--blue-light);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    /* Call-to-action button in the hero */
+    .btn-primary {
+      display: inline-block;
+      background: var(--white);
+      color: var(--blue-primary);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(20, 114, 164, 0.35);
+    }
+
+    /* ============================================================
+       SERVICES SECTION
+    ============================================================ */
+    .services {
+      padding: 6rem 6vw;
+      background: var(--white);
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blue-dark);
+      letter-spacing: 1.5px;
+      margin-bottom: 3rem;
+    }
+
+    /* Grid of service cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--off-white);
+      border: 1px solid var(--blue-light);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Icon circle on each card */
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--blue-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 1.6rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+      color: var(--blue-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       WHY CHOOSE US SECTION
+    ============================================================ */
+    .why-us {
+      padding: 6rem 6vw;
+      background: var(--blue-dark);
+      color: var(--white);
+    }
+
+    .why-us .section-label { color: var(--blue-mid); }
+    .why-us .section-title { color: var(--white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .why-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .why-number {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      color: var(--blue-mid);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .why-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-item p {
+      font-size: 0.88rem;
+      color: var(--blue-light);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CONTACT / INQUIRY SECTION
+    ============================================================ */
+    .contact {
+      padding: 6rem 6vw;
+      background: var(--off-white);
+    }
+
+    .contact-wrapper {
+      max-width: 580px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: calc(var(--radius) * 1.5);
+      box-shadow: var(--shadow);
+      padding: 3rem;
+    }
+
+    .contact-wrapper .section-title,
+    .contact-wrapper .section-label { text-align: left; }
+
+    /* Contact form fields */
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--blue-dark);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--blue-light);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      background: var(--off-white);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    /* Submit button – full width, blue */
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--blue-primary);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Small note under the form */
+    .contact-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--blue-dark);
+      color: var(--blue-light);
+      text-align: center;
+      padding: 2.5rem 6vw;
+      font-size: 0.88rem;
+    }
+
+    footer strong {
+      color: var(--white);
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 0.8rem 0;
+      list-style: none;
+    }
+
+    footer .footer-links a {
+      color: var(--blue-light);
+      transition: color var(--transition);
+    }
+
+    footer .footer-links a:hover { color: var(--white); }
+
+    /* ============================================================
+       ANIMATION
+    ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       RESPONSIVE – stack nav on small screens
+    ============================================================ */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }  /* hide links on mobile – add a hamburger if needed */
+      .contact-wrapper { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav>
+    <div class="nav-logo">LJ <span>WashWorks</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Professional Pressure Washing</span>
+      <h1>Make It <span>Shine</span><br>Again.</h1>
+      <p>
+        LJ WashWorks delivers powerful, reliable pressure washing for driveways,
+        decks, siding, fences, and more. Serving your community with pride.
+      </p>
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================ -->
+  <section class="services" id="services">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Our Services</h2>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>House Washing</h3>
+        <p>Restore your home's exterior with a thorough soft or pressure wash that removes dirt, mold, and grime.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚗</div>
+        <h3>Driveway & Concrete</h3>
+        <p>Blast away oil stains, tire marks, and years of buildup from concrete and asphalt surfaces.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <h3>Deck & Patio</h3>
+        <p>Prep your outdoor living space for the season with a deep clean that protects the wood or stone.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Commercial</h3>
+        <p>Storefronts, parking lots, and commercial properties cleaned efficiently with minimal disruption.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE US
+  ============================================================ -->
+  <section class="why-us" id="why-us">
+    <p class="section-label">Why LJ WashWorks</p>
+    <h2 class="section-title">Built on Results</h2>
+
+    <div class="why-grid">
+
+      <div class="why-item">
+        <div class="why-number">100%</div>
+        <h4>Satisfaction Guaranteed</h4>
+        <p>We don't call the job done until you're happy with the results.</p>
+      </div>
+
+      <div class="why-item">
+        <div class="why-number">5★</div>
+        <h4>Top-Rated Service</h4>
+        <p>Consistent 5-star reviews from homeowners and businesses alike.</p>
+      </div>
+
+      <div class="why-item">
+        <div class="why-number">Fast</div>
+        <h4>Quick Turnaround</h4>
+        <p>Most jobs completed same-day. We respect your time.</p>
+      </div>
+
+      <div class="why-item">
+        <div class="why-number">Safe</div>
+        <h4>Insured & Careful</h4>
+        <p>Fully insured crew trained to protect your property throughout the job.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT / INQUIRY FORM
+       - The mailto: link opens the visitor's email client with
+         the subject and body pre-filled from the form fields.
+  ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="contact-wrapper">
+      <p class="section-label">Reach Out</p>
+      <h2 class="section-title">Request a Quote</h2>
+
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Jane Smith" />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number (optional)</label>
+        <input type="tel" id="phone" placeholder="(555) 000-0000" />
+      </div>
+
+      <div class="form-group">
+        <label for="service">Service Needed</label>
+        <input type="text" id="service" placeholder="e.g. Driveway wash, House wash…" />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell us about your property and what you'd like cleaned…"></textarea>
+      </div>
+
+      <!-- Clicking this button builds a mailto: link and opens the visitor's email app -->
+      <button class="btn-submit" onclick="sendInquiry()">Send Inquiry</button>
+
+      <p class="contact-note">
+        Your message will open in your default email app addressed to us.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <strong>LJ WashWorks</strong>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p>&copy; 2025 LJ WashWorks. All rights reserved.</p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT – Inquiry form → mailto link
+       Reads the form fields, builds a mailto: URL, and opens it.
+  ============================================================ -->
+  <script>
+    function sendInquiry() {
+      // ── Change this address if the contact email ever changes ──
+      const TO_EMAIL = "ljwashworks@gmail.com";
+
+      // Grab what the visitor typed
+      const name    = document.getElementById("name").value.trim();
+      const phone   = document.getElementById("phone").value.trim();
+      const service = document.getElementById("service").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      // Basic validation – make sure at least a name and message exist
+      if (!name || !message) {
+        alert("Please fill in at least your name and a message before sending.");
+        return;
+      }
+
+      // Build the email subject and body
+      const subject = `Inquiry from ${name} – LJ WashWorks`;
+      const body =
+        `Name: ${name}\n` +
+        (phone   ? `Phone: ${phone}\n`     : "") +
+        (service ? `Service: ${service}\n` : "") +
+        `\nMessage:\n${message}`;
+
+      // Encode special characters so the URL is valid
+      const mailtoLink =
+        `mailto:${TO_EMAIL}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+      // Open the visitor's default email app
+      window.location.href = mailtoLink;
+    }
+  </script>
+
+</body>
+</html>
